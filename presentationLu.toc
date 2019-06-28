@@ -1,0 +1,12 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{Introduction}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{What is Localization?}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{How In-Door Localization is Executed}{4}{0}{1}
+\beamer@sectionintoc {2}{Sensors}{5}{0}{2}
+\beamer@subsectionintoc {2}{1}{Interoceptive Sensors}{5}{0}{2}
+\beamer@subsectionintoc {2}{2}{Exteroceptive Sensors}{6}{0}{2}
+\beamer@subsectionintoc {2}{3}{Sensors in Localization}{7}{0}{2}
+\beamer@sectionintoc {3}{Other Popular Localization Techniques}{8}{0}{3}
+\beamer@sectionintoc {4}{Caley-Meger Determinant}{9}{0}{4}
+\beamer@sectionintoc {5}{Caley-Meger Determinant Example}{13}{0}{5}
+\beamer@sectionintoc {6}{Future Plans - Incoming Week}{14}{0}{6}
