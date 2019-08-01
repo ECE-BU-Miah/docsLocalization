@@ -178,11 +178,11 @@
 \href{http://www.bradley.edu}{\includegraphics[height=0.5in]{figs/logoBU1-Print}}
 \vskip10pt
 \HRule \\[0.4cm]
-{\Huge \bfseries Project Notebook \\[0.5cm] \Large Multi-Robot Localization for Area Coverage}\\[0.4cm] % Degree
+{\Huge \bfseries Project Notebook \\[0.5cm] \Large Localization for Area Coverage}\\[0.4cm] % Degree
 \HRule \\[1.5cm]
 \end{center}
 }
-\author{\Huge Brian Lauer \\ \\ \LARGE blauer@mail.bradley.edu \\[2cm]} % Your name and email address
+\author{\Huge Caleb Lu \\ \\ \LARGE clu@mail.bradley.edu \\[2cm]} % Your name and email address
 \date{Beginning April 2019} % Beginning date
 \maketitle
 
@@ -192,71 +192,136 @@
 \tableofcontents % Table of contents
 \newpage % Start lab look on a new page
 
-\begin{addmargin}[0cm]{0cm} % Makes the text width much shorter for a compact look
+\begin{addmargin}[0cm]{0cm} % Makes the text width much shorter for a compact look - line completion at 233
 
 \pagestyle{scrheadings} % Begin using headers
 
 %----------------------------------------------------------------------------------------
 %	LAB BOOK CONTENTS
 %----------------------------------------------------------------------------------------
+% EXAMPLE ENTRY FROM DR MIAH
+%\labday{Friday, March 13, 2018}
 
-\labday{Friday, March 13, 2018}
-
-\experiment{Notation}
+%\experiment{Notation}
 %% Added by Dr. Miah 
-Throughout this document, the vectors (matrices) will be denoted by lowercase (uppercase) bold letters while the lowercase non-bold letters will denote scalar quantities. Sets will be denoted by calligraphic letters. For positive integers $m,n>0,$ $\mathbb{R}^n(\mathbb{R}^{m\times n})$ denotes $n$--dimensional column vector ($m\times n$--dimensional matrix) with entries taken from a set of real numbers $\mathbb{R}.$ $(\cdot)^T$ denotes the transposition of quantity $(\cdot).$ The standard Euclidean norm of the vector  $\mathbf{x}\in\mathbb{R}^n$ and the matrix $\mathbf{A}$ are given by $\Vert x \Vert = \left(\sum_{i=1}^n\lvert x_i\rvert^2\right)^{1/2}$ and $\Vert \mathbf{A} \Vert = \left(\sum_{i=1}^m\sum_{j=1}^n\lvert a_{ij}\rvert^2\right)^{1/2}$  with $x_i,a_{ij}$ being the entries of $\mathbf{x}$ and $\mathbf{A},$ respectively. The scalar products of quantities $\mathbf{x},
-\mathbf{y}\in\mathbb{R}^n$ and $\mathbf{A}, \mathbf{B}\in\mathbb{R}^{m\times n},$ are given by %
+%Throughout this document, the vectors (matrices) will be denoted by lowercase (uppercase) bold letters while the lowercase non-bold letters will denote scalar quantities. Sets will be denoted by calligraphic letters. For positive integers $m,n>0,$ $\mathbb{R}^n(\mathbb{R}^{m\times n})$ denotes $n$--dimensional column vector ($m\times n$--dimensional matrix) with entries taken from a set of real numbers $\mathbb{R}.$ $(\cdot)^T$ denotes the transposition of quantity $(\cdot).$ The standard Euclidean norm of the vector  $\mathbf{x}\in\mathbb{R}^n$ and the matrix $\mathbf{A}$ are given by $\Vert x \Vert = \left(\sum_{i=1}^n\lvert x_i\rvert^2\right)^{1/2}$ and $\Vert \mathbf{A} \Vert = \left(\sum_{i=1}^m\sum_{j=1}^n\lvert a_{ij}\rvert^2\right)^{1/2}$  with $x_i,a_{ij}$ being the entries of $\mathbf{x}$ and $\mathbf{A},$ respectively. The scalar products of quantities $\mathbf{x},
+%\mathbf{y}\in\mathbb{R}^n$ and $\mathbf{A}, \mathbf{B}\in\mathbb{R}^{m\times n},$ are given by %
 %
-\begin{align*}
-  \mathbf{x}^T\mathbf{y} = \sum_{i=1}^nx_iy_i~~\mathrm{and}~~\mathbf{A}\cdot \mathbf{B} =\mathrm{Tr}\left(\mathbf{A}^T\mathbf{B}\right) = \mathrm{Tr}\left(\mathbf{A}\mathbf{B}^T\right),
-\end{align*}
+%\begin{align*}
+%  \mathbf{x}^T\mathbf{y} = \sum_{i=1}^nx_iy_i~~\mathrm{and}~~\mathbf{A}\cdot \mathbf{B} =\mathrm{Tr}\left(\mathbf{A}^T\mathbf{B}\right) = \mathrm{Tr}\left(\mathbf{A}\mathbf{B}^T\right),
+%\end{align*}
 %
-respectively, where $\mathrm{Tr}(\cdot)$ is the trace of matrix $(\cdot).$ Clearly, $\mathrm{Tr}(\mathbf{A}^T\mathbf{A}) = \Vert \mathbf{A}\Vert^2.$ %
+%respectively, where $\mathrm{Tr}(\cdot)$ is the trace of matrix $(\cdot).$ Clearly, $\mathrm{Tr}(\mathbf{A}^T\mathbf{A}) = \Vert \mathbf{A}\Vert^2.$ %
 %
-% ----------------------------------------------------------------------------------------
-
-Example of citing a paper. ``Authors in~\cite{Martinelli2015-Robot} $\ldots$''
-
+%Example of citing a paper. ``Authors in~\cite{Martinelli2015-Robot} $\ldots$''
 
 %----------------------------------------------------------------------------------------
 %	LAB BOOK CONTENTS
 %----------------------------------------------------------------------------------------
-\labday{Friday, April 26, 2019}
+%Example Entry
+%\labday{Friday, May 03, 2019}
+%I still am in need of a laptop, so I must email Mr. Mattus once again on Monday, May 6.
+%\bigbreak\noindent
+%Dr. Miah showed me some of the Github commands to upload tex and pdf files to the Github repo. We added the meeting minutes files \texttt{meeting.tex} and \texttt{meeting.pdf}.
+%-----      ---------------    new day          -----------------------------
+\labday{Friday, Jun 28, 2019}
+After a meeting with Dr. Miah, the schedule of how I spend time on this project has been set. Every other Friday will be a presentation of accomplished work and future plans. Every Friday will be a day that Amr,Brian, and I will meet in the lab and work on our specific assignments. Today was the first day of working in the lab. I was able to clarify with Dr. Miah what specifically was the goal of my assignment and what was I suppose to do. 
+\bigbreak\noindent
+The task that I was assigned is to use multiple Zigbee boards to communicate to a BeagleBoneBlue (BBB) board. The end goal would be to have the BBB read the received signal strength , or RSS, of each Zigbee module. How to implement this was clarified by Dr. Miah.
+
+%-----      ---------------    new day          -----------------------------
+\labday{Thursday, July 4, 2019}
+Continued work from last entry.
+\begin{itemize}
+\item Configuring the Zigbee modules
+\item Configuring the BBB 
+\item Have the Zigbee communicate with each other.
+\end{itemize}
+
+Today I also need to accomplish the following.
+
+\begin{itemize}
+\item Presentation of work completed for the past week.
+\end{itemize}
+I have encounter a new issue, or atleast an old one has comeback. The issue of the Zigbee modules not connecting with the XCTU software has come back. This isn't a surprise since last time it was fixed, it was a result of it suddenly starting to work. 
+
+Will investigate in the future.
+
+%-----      ---------------    new day          -----------------------------
+\labday{Thursday, July 11, 2019}
+Sent Dr.Miah and update email about a Eric's schedule. Eric is a graduated Bradley student who will be advising the projects. I discussed with Eric with potential problems and solutions.
+
+%-----      ---------------    new day          -----------------------------
+\labday{Friday, July 12, 2019}
+Re-planned my approach on what I want to do and how to do it. My current understanding was to use the USB interface adapter with the XBee to communicate. The intended approach is to have the XBees run by themselves with out a USB interface board and in a mode that lets them run through commands from the main XBee. Will continue in this direction next time I get a chance to work on it.
+
+%-----      ---------------    new day          -----------------------------
+\labday{Friday, July 19, 2019}
+Began reading through the XBee data sheet. Looking into how to use the XBee boards without the need for an interface board. My current goal is to get 2-3 XBee connected on a network and communicating. The setup will be, one board is the coordinator and the other 2 will be endpoints/beacons. The coordinator will be connected to my laptop through the USB interface board. If i have the setup working, then I should be able to request a status to a specific beacon and using the coordinator, I should be able to read the RSSI.
+
+
+%-----      ---------------    new day          -----------------------------
+\labday{Thursday, July 25, 2019}
+A little behind in the work that needs to be done. Today I try the setup I discussed in the previous entry and will provide more details into how to do it/ what I did. 
+
+The XBee has two modes of operation: API mode and AT (Transparent) mode.
+The one that will be utilizing will be API mode because it has more features geared towards remote communication and will be helpful in sending commands with out a USB interface board. 
+
+Will continue to read into how to use API mode and what is required to send messages in this mode.
+
+%-----      ---------------    new day          -----------------------------
+\labday{Friday, July 26, 2019}
+Current setup I have is one XBee is the coordinator and one other is an endpoint. Today I configured the other XBee board I had. SO now I have 2 endpoints and 1 coordinator. Looking into how to send a command to the coordinator to check the RSSI of the 2 endpoints.
+
+%-----      ---------------    new day          -----------------------------
+\labday{Sunday, July 28, 2019}
+Continued reading and determining how to use API mode in the current setup. Also accessed the Beagle Bone Blue to check what options I have. Face an unexpected problem.
+
+The Beagle Bone Blue's (BBB) Root password is not the default password. So will need to learn how to reset the password to make changes to the BBB. The reason I need Root access is to set settings as a super user. Currently can't since the board seemed to be used by another student for the Mechatronics course. This might also explain why some of the encoder ports of the BBB are broken. 
+
+On method I wanted to try was to download XCTU, the program used to interface with the XBee boards through the USB port, onto the BBB and attempt to run commands from there. Couldn't try that after testing around with the BBB due to not having root access. 
+
+This BBB Root Access issue will probably be a major issue soon. Will divert focus to getting the XBee boards communication and making a C code to send commands to the XBee boards. 
+
+By the end of the work today, I was able to send a command to the XBee board to read the RSSI value. Using XCTU, I broadcast the command to return RSSI of the last received packet. This AT command, the commands for the XBee API mode, was "DB". This has led to another issue to solve, how to send this message to a sspecific XBee board. Will continue next work session.
+
+
+%-----      ---------------    new day          -----------------------------
+\labday{Monday, July 29, 2019}
+Went to Jobst and worked in the lounge. The lab was locked by the time I arrived. 
+Documented time: 5:15 PM - 7:15 PM
+
+Today, the goal is to document the means of connecting to the XBee boards and attempting to communicate with the XBee board through my laptop : Windows. After successful communication from windows, will use knowlegde to communicate from Linux/Write C code to communicate. 
+
+I predict I will have issues from the BBB. Without root control, I'm not sure if I will be able to register the correct serial port. After communicating from windows will begin to write C code to send messages over Linux. A small problem is that I will not be able to see the messages I'm sending, so I don't know if I'm sending the write one. Will read incoming data and store that to check if A: the XBee is responding, and B: the XBee sent back the correct data. Using Microsoft Powershell, I was able to write an AT command to the XBee. Using XCTU Frame Generator I found the values to write to the XBee.  
+
+
+%-----      ---------------    new day          -----------------------------
+\labday{Tuesday, July 30, 2019}
+Updated some previous entries. (Entries are kept in a physical notebook and then moved over to this document). 
+
+Today I'm trying to write code to communicate with the XBee over serial connection from the BBB. Yesterday I was able to send the commands to the XBee, but was unsure about what was sent and if the commend sent was correct. One major mistake from yesterday was not trying to read any incoming values after sending the command to read RSSI. Most of today was spent documenting. Tomorrow will spend testing.
+
+%-----      ---------------    new day          -----------------------------
+\labday{Wednesday, July 31, 2019}
+
+Testing that today to check response is correct. 
+
+Results of test: 
+
+So writing code, but will not be able to test it. Will upload it to the Github and inform Miah about the predicament. Actions that still need to be done:
+
+\begin{itemize}
+\item Resetting the BBB
+\item Sending specific commands to XBee to only get one response from a specific beacon. 
+\item Getting the C code to work in Linux properly
+\item Getting the C code to store the data. 
+\end{itemize}
+
+
+
 %----------------------------------------------------------------------------------------
-Dr. Miah will write a research grant proposal under BEMOSS and is due May 3.
-\bigbreak\noindent
-All documentation will be maintained in a github repository for this project.
-I need to create a Github account and send my username to Dr. Miah. A Google Drive with the same name as the Github repository will be created name DocsBEMOSS.
-\bigbreak\noindent
-I need to talk to Mr. Mattus about getting a laptop for research. It must be installed with Ubuntu administrative privileges. 
-\bigbreak\noindent
-Send him an email:
-\bigbreak\noindent
-Hello Mr. Mattus, I will be working on a project with Dr. Miah. For that we would like to request a laptop available in the department if possible so that we can install Ubuntu operating system. 
-\bigbreak\noindent
-Try to go see him in the afternoon.
-\bigbreak\noindent
-I need to learn the following Github Bash terminal commands:
-\begin{verbatim}
-Git add
-Git commit -m "message"
-Git remote add origin 'url'
-\end{verbatim}
-To get a better undestanding of what is going on I need to go through Github tutorials.
-
-%\item Upload latex file to Drive
-\labday{Thursday, May 02, 2019}
-I met with Reece Bachman, Jordan Ingram, and Robert O'Malley in the lab with the intention of filming a video of the BEMOSS installation from start to finish. However, I misinterpreted Dr. Miah's email and thought we were going to install on the current laptop they have in the lab. Instead, I was expected to have received one from Mr. Mattus with Ubuntu installed. Robert showed me the motor setup with the Zigbee module, L298N dual H bridge module, and buck-boost converter. Later, Jordan demonstrated his work with the HVAC controller.
-
-\labday{Friday, May 03, 2019}
-I still am in need of a laptop, so I must email Mr. Mattus once again on Monday, May 6.
-\bigbreak\noindent
-Dr. Miah showed me some of the Github commands to upload tex and pdf files to the Github repo. We added the meeting minutes files \texttt{meeting.tex} and \texttt{meeting.pdf}.
-
-\labday{Friday, May 10, 2019}
-Today, I met with Bob and Jordan to film the installation of BEMOSS on my borrowed laptop. After Bob attempted to install BEMOSS twice, he came to the conclusion that I installed the wrong version of Ubuntu on my machine. BEMOSS requires 16.04.5 not 16.04.6 that I had installed before the first installation. After another attempt at installing the software on Ubuntu 16.04.5, the same issue persisted involving three python modules not installing.
 \end{addmargin}
-
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
