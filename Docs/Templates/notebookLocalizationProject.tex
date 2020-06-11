@@ -1,0 +1,385 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Compact Laboratory Book
+% LaTeX Template
+% Version 1.0 (4/6/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Joan Queralt Gil (http://phobos.xtec.cat/jqueralt) using the labbook class by
+% Frank Kuster (http://www.ctan.org/tex-archive/macros/latex/contrib/labbook/)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+% Important note:
+% This template requires the labbook.cls file to be in the same directory as the
+% .tex file. The labbook.cls file provides the necessary structure to create the
+% lab book.
+%
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing lab book content.
+%
+% HOW TO USE THIS TEMPLATE 
+% Each day in the lab consists of three main things:
+%
+% 1. LABDAY: The first thing to put is the \labday{} command with a date in 
+% curly brackets, this will make a new section showing that you are working
+% on a new day.
+%
+% 2. EXPERIMENT/SUBEXPERIMENT: Next you need to specify what 
+% experiment(s) and subexperiment(s) you are working on with a 
+% \experiment{} and \subexperiment{} commands with the experiment 
+% shorthand in the curly brackets. The experiment shorthand is defined in the 
+% 'DEFINITION OF EXPERIMENTS' section below, this means you can 
+% say \experiment{pcr} and the actual text written to the PDF will be what 
+% you set the 'pcr' experiment to be. If the experiment is a one off, you can 
+% just write it in the bracket without creating a shorthand. Note: if you don't 
+% want to have an experiment, just leave this out and it won't be printed.
+%
+% 3. CONTENT: Following the experiment is the content, i.e. what progress 
+% you made on the experiment that day.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------                               
+%\UseRawInputEncoding
+\documentclass[fontsize=11pt, % Document font size
+                             paper=letter, % Document paper type
+                             twoside, % Shifts odd pages to the left for easier reading when printed, can be changed to oneside
+                             captions=tableheading,
+                             index=totoc,
+                             hyperref]{labbook}
+
+%\documentclass[idxtotoc,hyperref,openany]{labbook} % 'openany' here removes the
+   
+\usepackage[bottom=10em]{geometry} % Reduces the whitespace at the bottom of the page so more text can fit
+
+\usepackage[english]{babel} % English language
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage[utf8]{inputenc} % Uses the utf8 input encoding
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+
+\usepackage[osf]{mathpazo} % Palatino as the main font
+\linespread{1.05}\selectfont % Palatino needs some extra spacing, here 5% extra
+\usepackage[scaled=.88]{beramono} % Bera-Monospace
+\usepackage[scaled=.86]{berasans} % Bera Sans-Serif
+
+\usepackage{booktabs,array} % Packages for tables
+
+\usepackage{amsmath} % For typesetting math
+\usepackage{graphicx} % Required for including images
+\usepackage{etoolbox}
+\usepackage[norule]{footmisc} % Removes the horizontal rule from footnotes
+\usepackage{lastpage} % Counts the number of pages of the document
+
+\usepackage[dvipsnames]{xcolor}  % Allows the definition of hex colors
+\definecolor{titleblue}{rgb}{0.16,0.24,0.64} % Custom color for the title on the title page
+\definecolor{linkcolor}{rgb}{0,0,0.42} % Custom color for links - dark blue at the moment
+
+\addtokomafont{title}{\Huge\color{titleblue}} % Titles in custom blue color
+\addtokomafont{chapter}{\color{OliveGreen}} % Lab dates in olive green
+\addtokomafont{section}{\color{Sepia}} % Sections in sepia
+\addtokomafont{pagehead}{\normalfont\sffamily\color{gray}} % Header text in gray and sans serif
+\addtokomafont{caption}{\footnotesize\itshape} % Small italic font size for captions
+\addtokomafont{captionlabel}{\upshape\bfseries} % Bold for caption labels
+\addtokomafont{descriptionlabel}{\rmfamily}
+\setcapwidth[r]{10cm} % Right align caption text
+\setkomafont{footnote}{\sffamily} % Footnotes in sans serif
+
+\deffootnote[4cm]{4cm}{1em}{\textsuperscript{\thefootnotemark}} % Indent footnotes to line up with text
+
+\DeclareFixedFont{\textcap}{T1}{phv}{bx}{n}{1.5cm} % Font for main title: Helvetica 1.5 cm
+\DeclareFixedFont{\textaut}{T1}{phv}{bx}{n}{0.8cm} % Font for author name: Helvetica 0.8 cm
+
+\usepackage[nouppercase,headsepline]{scrlayer-scrpage} % Provides headers and footers configuration
+\pagestyle{scrheadings} % Print the headers and footers on all pages
+\clearscrheadfoot % Clean old definitions if they exist
+
+\automark[chapter]{chapter}
+\ohead{\headmark} % Prints outer header
+
+\setlength{\headheight}{25pt} % Makes the header take up a bit of extra space for aesthetics
+\setheadsepline{.4pt} % Creates a thin rule under the header
+\addtokomafont{headsepline}{\color{lightgray}} % Colors the rule under the header light gray
+
+\ofoot[\normalfont\normalcolor{\thepage\ |\  \pageref{LastPage}}]{\normalfont\normalcolor{\thepage\ |\  \pageref{LastPage}}} % Creates an outer footer of: "current page | total pages"
+
+% These lines make it so each new lab day directly follows the previous one i.e. does not start on a new page - comment them out to separate lab days on new pages
+\makeatletter
+\patchcmd{\addchap}{\if@openright\cleardoublepage\else\clearpage\fi}{\par}{}{}
+\makeatother
+\renewcommand*{\chapterpagestyle}{scrheadings}
+
+% These lines make it so every figure and equation in the document is numbered consecutively rather than restarting at 1 for each lab day - comment them out to remove this behavior
+\usepackage{chngcntr}
+\counterwithout{figure}{labday}
+\counterwithout{equation}{labday}
+
+% Hyperlink configuration
+\usepackage[
+    pdfauthor={}, % Your name for the author field in the PDF
+    pdftitle={Laboratory Journal}, % PDF title
+    pdfsubject={}, % PDF subject
+    bookmarksopen=true,
+    linktocpage=true,
+    urlcolor=linkcolor, % Color of URLs
+    citecolor=linkcolor, % Color of citations
+    linkcolor=linkcolor, % Color of links to other pages/figures
+    backref=page,
+    pdfpagelabels=true,
+    plainpages=false,
+    colorlinks=true, % Turn off all coloring by changing this to false
+    bookmarks=true,
+    pdfview=FitB]{hyperref}
+
+\usepackage[stretch=10]{microtype} % Slightly tweak font spacing for aesthetics
+
+%\setlength\parindent{0pt} % Uncomment to remove all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DEFINITION OF EXPERIMENTS
+%----------------------------------------------------------------------------------------
+
+% Template: \newexperiment{<abbrev>}[<short form>]{<long form>}
+% <abbrev> is the reference to use later in the .tex file in \experiment{}, the <short form> is only used in the table of contents and running title - it is optional, <long form> is what is printed in the lab book itself
+
+\newexperiment{example}[Example experiment]{This is an example experiment}
+\newexperiment{example2}[Example experiment 2]{This is another example experiment}
+\newexperiment{example3}[Example experiment 3]{This is yet another example experiment}
+
+\newsubexperiment{subexp_example}[Example sub-experiment]{This is an example sub-experiment}
+\newsubexperiment{subexp_example2}[Example sub-experiment 2]{This is another example sub-experiment}
+\newsubexperiment{subexp_example3}[Example sub-experiment 3]{This is yet another example sub-experiment}
+
+%----------------------------------------------------------------------------------------
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Command to make the lines in the title page
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+%\frontmatter % Use Roman numerals for page numbers
+
+%\begin{center}
+
+%
+
+\title{
+\begin{center}
+\href{http://www.bradley.edu}{\includegraphics[height=0.5in]{figs/logoBU1-Print}}
+\vskip10pt
+\HRule \\[0.4cm]
+{\Huge \bfseries Project Notebook \\[0.5cm] \Large Localization for Area Coverage}\\[0.4cm] % Degree
+\HRule \\[1.5cm]
+\end{center}
+}
+\author{\Huge Caleb Lu \\ \\ \LARGE clu@mail.bradley.edu \\[2cm]} % Your name and email address
+\date{Beginning April 2019} % Beginning date
+\maketitle
+
+%\maketitle % Title page
+
+\printindex
+\tableofcontents % Table of contents
+\newpage % Start lab look on a new page
+
+\begin{addmargin}[0cm]{0cm} % Makes the text width much shorter for a compact look - line completion at 233
+
+\pagestyle{scrheadings} % Begin using headers
+
+%----------------------------------------------------------------------------------------
+%	LAB BOOK CONTENTS
+%----------------------------------------------------------------------------------------
+% EXAMPLE ENTRY FROM DR MIAH
+%\labday{Friday, March 13, 2018}
+
+%\experiment{Notation}
+%% Added by Dr. Miah 
+%Throughout this document, the vectors (matrices) will be denoted by lowercase (uppercase) bold letters while the lowercase non-bold letters will denote scalar quantities. Sets will be denoted by calligraphic letters. For positive integers $m,n>0,$ $\mathbb{R}^n(\mathbb{R}^{m\times n})$ denotes $n$--dimensional column vector ($m\times n$--dimensional matrix) with entries taken from a set of real numbers $\mathbb{R}.$ $(\cdot)^T$ denotes the transposition of quantity $(\cdot).$ The standard Euclidean norm of the vector  $\mathbf{x}\in\mathbb{R}^n$ and the matrix $\mathbf{A}$ are given by $\Vert x \Vert = \left(\sum_{i=1}^n\lvert x_i\rvert^2\right)^{1/2}$ and $\Vert \mathbf{A} \Vert = \left(\sum_{i=1}^m\sum_{j=1}^n\lvert a_{ij}\rvert^2\right)^{1/2}$  with $x_i,a_{ij}$ being the entries of $\mathbf{x}$ and $\mathbf{A},$ respectively. The scalar products of quantities $\mathbf{x},
+%\mathbf{y}\in\mathbb{R}^n$ and $\mathbf{A}, \mathbf{B}\in\mathbb{R}^{m\times n},$ are given by %
+%
+%\begin{align*}
+%  \mathbf{x}^T\mathbf{y} = \sum_{i=1}^nx_iy_i~~\mathrm{and}~~\mathbf{A}\cdot \mathbf{B} =\mathrm{Tr}\left(\mathbf{A}^T\mathbf{B}\right) = \mathrm{Tr}\left(\mathbf{A}\mathbf{B}^T\right),
+%\end{align*}
+%
+%respectively, where $\mathrm{Tr}(\cdot)$ is the trace of matrix $(\cdot).$ Clearly, $\mathrm{Tr}(\mathbf{A}^T\mathbf{A}) = \Vert \mathbf{A}\Vert^2.$ %
+%
+%Example of citing a paper. ``Authors in~\cite{Martinelli2015-Robot} $\ldots$''
+
+%----------------------------------------------------------------------------------------
+%	LAB BOOK CONTENTS
+%----------------------------------------------------------------------------------------
+%Example Entry
+%\labday{Friday, May 03, 2019}
+%I still am in need of a laptop, so I must email Mr. Mattus once again on Monday, May 6.
+%\bigbreak\noindent
+%Dr. Miah showed me some of the Github commands to upload tex and pdf files to the Github repo. We added the meeting minutes files \texttt{meeting.tex} and \texttt{meeting.pdf}.
+%-----      ---------------    new day          -----------------------------
+\labday{Friday, Jun 28, 2019}
+After a meeting with Dr. Miah, the schedule of how I spend time on this project has been set. Every other Friday will be a presentation of accomplished work and future plans. Every Friday will be a day that Amr,Brian, and I will meet in the lab and work on our specific assignments. Today was the first day of working in the lab. I was able to clarify with Dr. Miah what specifically was the goal of my assignment and what was I suppose to do. 
+\bigbreak\noindent
+The task that I was assigned is to use multiple Zigbee boards to communicate to a BeagleBoneBlue (BBB) board. The end goal would be to have the BBB read the received signal strength , or RSS, of each Zigbee module. How to implement this was clarified by Dr. Miah.
+
+%-----      ---------------    new day          -----------------------------
+\labday{Thursday, July 4, 2019}
+Continued work from last entry.
+\begin{itemize}
+\item Configuring the Zigbee modules
+\item Configuring the BBB 
+\item Have the Zigbee communicate with each other.
+\end{itemize}
+
+Today I also need to accomplish the following.
+
+\begin{itemize}
+\item Presentation of work completed for the past week.
+\end{itemize}
+I have encounter a new issue, or atleast an old one has comeback. The issue of the Zigbee modules not connecting with the XCTU software has come back. This isn't a surprise since last time it was fixed, it was a result of it suddenly starting to work. 
+
+Will investigate in the future.
+
+%-----      ---------------    new day          -----------------------------
+\labday{Thursday, July 11, 2019}
+Sent Dr.Miah and update email about a Eric's schedule. Eric is a graduated Bradley student who will be advising the projects. I discussed with Eric with potential problems and solutions.
+
+%-----      ---------------    new day          -----------------------------
+\labday{Friday, July 12, 2019}
+Re-planned my approach on what I want to do and how to do it. My current understanding was to use the USB interface adapter with the XBee to communicate. The intended approach is to have the XBees run by themselves with out a USB interface board and in a mode that lets them run through commands from the main XBee. Will continue in this direction next time I get a chance to work on it.
+
+%-----      ---------------    new day          -----------------------------
+\labday{Friday, July 19, 2019}
+Began reading through the XBee data sheet. Looking into how to use the XBee boards without the need for an interface board. My current goal is to get 2-3 XBee connected on a network and communicating. The setup will be, one board is the coordinator and the other 2 will be endpoints/beacons. The coordinator will be connected to my laptop through the USB interface board. If i have the setup working, then I should be able to request a status to a specific beacon and using the coordinator, I should be able to read the RSSI.
+
+
+%-----      ---------------    new day          -----------------------------
+\labday{Thursday, July 25, 2019}
+A little behind in the work that needs to be done. Today I try the setup I discussed in the previous entry and will provide more details into how to do it/ what I did. 
+
+The XBee has two modes of operation: API mode and AT (Transparent) mode.
+The one that will be utilizing will be API mode because it has more features geared towards remote communication and will be helpful in sending commands with out a USB interface board. 
+
+Will continue to read into how to use API mode and what is required to send messages in this mode.
+
+%-----      ---------------    new day          -----------------------------
+\labday{Friday, July 26, 2019}
+Current setup I have is one XBee is the coordinator and one other is an endpoint. Today I configured the other XBee board I had. SO now I have 2 endpoints and 1 coordinator. Looking into how to send a command to the coordinator to check the RSSI of the 2 endpoints.
+
+%-----      ---------------    new day          -----------------------------
+\labday{Sunday, July 28, 2019}
+Continued reading and determining how to use API mode in the current setup. Also accessed the Beagle Bone Blue to check what options I have. Face an unexpected problem.
+
+The Beagle Bone Blue's (BBB) Root password is not the default password. So will need to learn how to reset the password to make changes to the BBB. The reason I need Root access is to set settings as a super user. Currently can't since the board seemed to be used by another student for the Mechatronics course. This might also explain why some of the encoder ports of the BBB are broken. 
+
+On method I wanted to try was to download XCTU, the program used to interface with the XBee boards through the USB port, onto the BBB and attempt to run commands from there. Couldn't try that after testing around with the BBB due to not having root access. 
+
+This BBB Root Access issue will probably be a major issue soon. Will divert focus to getting the XBee boards communication and making a C code to send commands to the XBee boards. 
+
+By the end of the work today, I was able to send a command to the XBee board to read the RSSI value. Using XCTU, I broadcast the command to return RSSI of the last received packet. This AT command, the commands for the XBee API mode, was "DB". This has led to another issue to solve, how to send this message to a sspecific XBee board. Will continue next work session.
+
+
+%-----      ---------------    new day          -----------------------------
+\labday{Monday, July 29, 2019}
+Went to Jobst and worked in the lounge. The lab was locked by the time I arrived. 
+Documented time: 5:15 PM - 7:15 PM
+
+Today, the goal is to document the means of connecting to the XBee boards and attempting to communicate with the XBee board through my laptop : Windows. After successful communication from windows, will use knowlegde to communicate from Linux/Write C code to communicate. 
+
+I predict I will have issues from the BBB. Without root control, I'm not sure if I will be able to register the correct serial port. After communicating from windows will begin to write C code to send messages over Linux. A small problem is that I will not be able to see the messages I'm sending, so I don't know if I'm sending the write one. Will read incoming data and store that to check if A: the XBee is responding, and B: the XBee sent back the correct data. Using Microsoft Powershell, I was able to write an AT command to the XBee. Using XCTU Frame Generator I found the values to write to the XBee.  
+
+
+%-----      ---------------    new day          -----------------------------
+\labday{Tuesday, July 30, 2019}
+Updated some previous entries. (Entries are kept in a physical notebook and then moved over to this document). 
+
+Today I'm trying to write code to communicate with the XBee over serial connection from the BBB. Yesterday I was able to send the commands to the XBee, but was unsure about what was sent and if the commend sent was correct. One major mistake from yesterday was not trying to read any incoming values after sending the command to read RSSI. Most of today was spent documenting. Tomorrow will spend testing.
+
+%-----      ---------------    new day          -----------------------------
+\labday{Wednesday, July 31, 2019}
+
+Testing that today to check response is correct. 
+
+Results of test: 
+
+So writing code, but will not be able to test it. Will upload it to the Github and inform Miah about the predicament. Actions that still need to be done:
+
+\begin{itemize}
+\item Resetting the BBB
+\item Sending specific commands to XBee to only get one response from a specific beacon. 
+\item Getting the C code to work in Linux properly
+\item Getting the C code to store the data. 
+\end{itemize}
+
+%-----      ---------------    new day          -----------------------------
+\labday{Friday, August 2, 2019}
+GOALS:
+\begin{itemize}
+\item Get beaglebone unlock/test more passwords
+\item Start Writing code to open terminal and send and receive data
+\end{itemize}
+
+Tested passwords and it turns out I was typing the password in wrong, multiple times. Changed Debian password to debian on accident but will keep it. Root still remains locked but I think I can access everything I need from debian hopefully.
+
+ADD MORE
+
+%-----      ---------------    new day          -----------------------------
+\labday{Friday, August 9, 2019}
+GOALS OF NEXT COUPLE SESSIONS - Goals for next Friday:
+\begin{itemize}
+\item opens a terminal
+\item receives and sends data
+\item parses that data into a table. 
+
+\end{itemize}
+
+%-----      ---------------    new day          -----------------------------
+\labday{Tuesday, August 13, 2019}
+GOALS OF NEXT COUPLE SESSIONS - Goals for next Friday:
+\begin{itemize}
+\item opens a terminal
+\item receives and sends data
+\item parses that data into a table. 
+
+\end{itemize}
+
+
+
+%----------------------------------------------------------------------------------------
+\end{addmargin}
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+
+\bibliographystyle{plain}
+\bibliography{bib/seniorProject2017.bib}
+
+
+% \begin{thebibliography}{9}
+
+% \bibitem{lamport94}
+% Leslie Lamport,
+% \emph{\LaTeX: A Document Preparation System}.
+% Addison Wesley, Massachusetts,
+% 2nd Edition,
+% 1994.
+
+% \end{thebibliography}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
