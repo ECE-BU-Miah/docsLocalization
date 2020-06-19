@@ -195,36 +195,50 @@
 %----------------------------------------------------------------------------------------
 % BASIC EAMPLE ENTRY FROM DARRAH BEEBE
 %-----      ---------------    new day          -----------------------------
-\labday{Monday, January 1, 1900}
-Content goes here for the day.
-\bigbreak\noindent
-Content for this day in a second block can go here.
-\bigbreak\noindent
-Content block followed by example item list.
-\begin{itemize}
-\item First item in list.
-\item Another item in the list.
-\item And another item in the list.
-\end{itemize}
-More text in same block after item list.
+%\labday{Monday, January 1, 1900}
+%Content goes here for the day.
+%\bigbreak\noindent
+%Content for this day in a second block can go here.
+%\bigbreak\noindent
+%Content block followed by example item list.
+%\begin{itemize}
+%\item First item in list.
+%\item Another item in the list.
+%\item And another item in the list.
+%\end{itemize}
+%More text in same block after item list.
 
 
 % EXAMPLE ENTRY FROM DR MIAH
 %-----      ---------------    new day          -----------------------------
-\labday{Friday, March 13, 2018}
+%\labday{Friday, March 13, 2018}
 
 %\experiment{Notation} % Comment by Darrah "This is broken currently not shure why"
 % Added by Dr. Miah 
-Throughout this document, the vectors (matrices) will be denoted by lowercase (uppercase) bold letters while the lowercase non-bold letters will denote scalar quantities. Sets will be denoted by calligraphic letters. For positive integers $m,n>0,$ $\mathbb{R}^n(\mathbb{R}^{m\times n})$ denotes $n$--dimensional column vector ($m\times n$--dimensional matrix) with entries taken from a set of real numbers $\mathbb{R}.$ $(\cdot)^T$ denotes the transposition of quantity $(\cdot).$ The standard Euclidean norm of the vector  $\mathbf{x}\in\mathbb{R}^n$ and the matrix $\mathbf{A}$ are given by $\Vert x \Vert = \left(\sum_{i=1}^n\lvert x_i\rvert^2\right)^{1/2}$ and $\Vert \mathbf{A} \Vert = \left(\sum_{i=1}^m\sum_{j=1}^n\lvert a_{ij}\rvert^2\right)^{1/2}$  with $x_i,a_{ij}$ being the entries of $\mathbf{x}$ and $\mathbf{A},$ respectively. The scalar products of quantities $\mathbf{x},
-\mathbf{y}\in\mathbb{R}^n$ and $\mathbf{A}, \mathbf{B}\in\mathbb{R}^{m\times n},$ are given by %
+%Throughout this document, the vectors (matrices) will be denoted by lowercase (uppercase) bold letters while the lowercase non-bold letters will denote scalar quantities. Sets will be denoted by calligraphic letters. For positive integers $m,n>0,$ $\mathbb{R}^n(\mathbb{R}^{m\times n})$ denotes $n$--dimensional column vector ($m\times n$--dimensional matrix) with entries taken from a set of real numbers $\mathbb{R}.$ $(\cdot)^T$ denotes the transposition of quantity $(\cdot).$ The standard Euclidean norm of the vector  $\mathbf{x}\in\mathbb{R}^n$ and the matrix $\mathbf{A}$ are given by $\Vert x \Vert = \left(\sum_{i=1}^n\lvert x_i\rvert^2\right)^{1/2}$ and $\Vert \mathbf{A} \Vert = \left(\sum_{i=1}^m\sum_{j=1}^n\lvert a_{ij}\rvert^2\right)^{1/2}$  with $x_i,a_{ij}$ being the entries of $\mathbf{x}$ and $\mathbf{A},$ respectively. The scalar products of quantities $\mathbf{x},
+%\mathbf{y}\in\mathbb{R}^n$ and $\mathbf{A}, \mathbf{B}\in\mathbb{R}^{m\times n},$ are given by %
+%
+%\begin{align*}
+%  \mathbf{x}^T\mathbf{y} = \sum_{i=1}^nx_iy_i~~\mathrm{and}~~\mathbf{A}\cdot \mathbf{B} =\mathrm{Tr}\left(\mathbf{A}^T\mathbf{B}\right) = \mathrm{Tr}\left(\mathbf{A}\mathbf{B}^T\right),
+%\end{align*}
+%
+%respectively, where $\mathrm{Tr}(\cdot)$ is the trace of matrix $(\cdot).$ Clearly, $\mathrm{Tr}(\mathbf{A}^T\mathbf{A}) = \Vert \mathbf{A}\Vert^2.$ %
+%
+%Example of citing a paper. ``Authors in~\cite{Martinelli2015-Robot} $\ldots$''
 
-\begin{align*}
-  \mathbf{x}^T\mathbf{y} = \sum_{i=1}^nx_iy_i~~\mathrm{and}~~\mathbf{A}\cdot \mathbf{B} =\mathrm{Tr}\left(\mathbf{A}^T\mathbf{B}\right) = \mathrm{Tr}\left(\mathbf{A}\mathbf{B}^T\right),
-\end{align*}
+%-----      ---------------    new day          -----------------------------
+\labday{Thursday, June 11, 2020}
+This is the first entry for this project notebook since I was unaware that I had to log my work day by day in one till yesterday on Wednesday 6/10/20 when I had a meeting with Dr. Miah.
+\bigbreak\noindent
+On Tuesday I Finally got to a point of understanding of the math behind relating distance and the Revived Signal Strength of RSSI.  From this I had put together some code to test it out and found that the results are a bit more inconsistent than I expected. Which prompted the meeting to update and get clarification. Then today i worked on testing the math a bit more with some programs and trying to figure out a formula for distance to RSSI that was suggested by Dr. Miah.
 
-respectively, where $\mathrm{Tr}(\cdot)$ is the trace of matrix $(\cdot).$ Clearly, $\mathrm{Tr}(\mathbf{A}^T\mathbf{A}) = \Vert \mathbf{A}\Vert^2.$ %
+%-----      ---------------    new day          -----------------------------
+\labday{Friday, June 12, 2020}
+Worked on cleaning up and fixing some code related to distance as well as the Github for the project.  Working through figuring out issues with distance by reading a bit through sources of the Dr. Miah Reference paper as well and testing out how the XBees work a bit more.
 
-Example of citing a paper. ``Authors in~\cite{Martinelli2015-Robot} $\ldots$''
+%-----      ---------------    new day          -----------------------------
+\labday{Friday, June 12, 2020}
+All work today was spent on cleaning up code and documentation in general the Github should now be fully documented up to today as well as contain the most current copy of the code.
 
 %----------------------------------------------------------------------------------------
 \end{addmargin}
@@ -234,19 +248,19 @@ Example of citing a paper. ``Authors in~\cite{Martinelli2015-Robot} $\ldots$''
 
 % BIBLOGRAPHY EXAMPLE
 
-\bibliographystyle{plain}
-\bibliography{bib/Notebook.bib}
-
-\begin{thebibliography}{9}
-
-\bibitem{lamport94}
-Leslie Lamport,
-\emph{\LaTeX: A Document Preparation System}.
-Addison Wesley, Massachusetts,
-2nd Edition,
-994.
-
-\end{thebibliography}
+%\bibliographystyle{plain}
+%\bibliography{bib/Notebook.bib}
+%
+%\begin{thebibliography}{9}
+%
+%\bibitem{lamport94}
+%Leslie Lamport,
+%\emph{\LaTeX: A Document Preparation System}.
+%Addison Wesley, Massachusetts,
+%2nd Edition,
+%994.
+%
+%\end{thebibliography}
 
 %----------------------------------------------------------------------------------------
 

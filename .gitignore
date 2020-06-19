@@ -1,0 +1,11 @@
+# Ignore extra files created from compiling .tex file into a pdf
+*.aux
+*.brf
+*.idx
+*.log
+*.out
+*.synctex.gz
+*.toc
+
+# Ignore pdf versions of images created by .tex comilation
+**/figs/*.pdf
