@@ -12,6 +12,20 @@ This ReadMe is for "docsLocalization/Code/" directory.
 	The Header also contins basic functions asociated with Vec3
 	Which currently are:
 	Vec3_Create, Vec3_Print, Vec3_Multiply, Vec3_Add, Vec3_Subtract, Vec3_Cross, Vec3_Magnitude
+> Matrices.h
+	Header containg Definitions for Mat4 and Mat5 and
+	Matrix Determinant function for Mat4 and Mat5
+> RSSILocal.h
+	Header containg key functions for using RSSI values for localization
+	such as RSSIToMetters and Trilateration functions
+> Trilateration.c
+	Main script that runs Trilateration for localization of the cordinator XBee 
+	by using the three beacon endpoint XBees and there RSSI values
+> Compile.sh
+	A Shell Script that helps simplify compiling with GCC and takes a the
+	desired file to compiles name as its ownly peramiter and spits aouta TestProg.a
+	compiles file to run on the Beablebone
+	eg) ./Compile.sh [File Path/Name]
 
 [[ Notes ]]
 > When compiling code with GCC on the linux device "-lm" should be added onto

@@ -226,23 +226,43 @@
 %
 %Example of citing a paper. ``Authors in~\cite{Martinelli2015-Robot} $\ldots$''
 
-%-----      ---------------    new day          -----------------------------
+%--------------------------    new day          -----------------------------
 \labday{Thursday, June 11, 2020}
 This is the first entry for this project notebook since I was unaware that I had to log my work day by day in one till yesterday on Wednesday 6/10/20 when I had a meeting with Dr. Miah.
 \bigbreak\noindent
 On Tuesday I Finally got to a point of understanding of the math behind relating distance and the Revived Signal Strength of RSSI.  From this I had put together some code to test it out and found that the results are a bit more inconsistent than I expected. Which prompted the meeting to update and get clarification. Then today i worked on testing the math a bit more with some programs and trying to figure out a formula for distance to RSSI that was suggested by Dr. Miah.
 
-%-----      ---------------    new day          -----------------------------
+%--------------------------    new day          -----------------------------
 \labday{Friday, June 12, 2020}
 Worked on cleaning up and fixing some code related to distance as well as the Github for the project.  Working through figuring out issues with distance by reading a bit through sources of the Dr. Miah Reference paper as well and testing out how the XBees work a bit more.
 
-%-----      ---------------    new day          -----------------------------
+%--------------------------    new day          -----------------------------
 \labday{Friday, June 12, 2020}
 All work today was spent on cleaning up code and documentation in general the Github should now be fully documented up to today as well as contain the most current copy of the code.
 
-%-----      ---------------    new day          -----------------------------
+%--------------------------    new day          -----------------------------
 \labday{Friday, June 24, 2020}
 Distance is still not quite correct but have decided to work on implementing the trilateration with Caley-Menger determinants.  The first thing I did today was create a test program to confirm that I could read out coordinates and store them in a temporary dummy Vector 3 structure. I got this working so that the 3 stationary beacons positions can be entered into a text file and then read in by the program to avoid hard coded values or halving to type the coordinates in as perambulates each time the program is run.  Then I moved onto creating a more proper Vector 3 structure header. The header that was created was "Vec3.h" which contains a Vec3 struct in it as well as some functions for interacting with it. I then put together a Test script to test the functionality of the Vec3 struct and its associated functions to check that it was functioning properly before further use.
+
+%--------------------------    new day          -----------------------------
+\labday{Wednesday, July 15, 2020}
+Did some Research looking around online trying to figure out how to program a determinant of a 4x4 Matrix and 5x5 Matrix efficiently.  I did find that the average case more eficient version of finding matrix determinants is done with LU-decomposition and have not figured out how to implement this yet.
+
+%--------------------------    new day          -----------------------------
+\labday{Thursday, July 16, 2020}
+Did a bit more research trying to figure out how to code LU-decomposition and made a little bit of progress but decided to just code the slightly more inefficient manor which seams easier to implement.  This version being the normal decomposition for square matrices into the matrix dimension minus-1 and solve its determinate.
+
+%--------------------------    new day          -----------------------------
+\labday{Friday, July 17, 2020}
+Just worked on getting the slightly inefficient version of Matrix determinants running then getting a test program together that calculates the example problem in Dr. Miahs book to check if the math is running correctly with it is.
+
+%--------------------------    new day          -----------------------------
+\labday{Monday, July 20, 2020}
+Organized file of BeableBone some to make it easier to manage and then started putting together the Main c file that runs the whole RSSI to Localization process and math.  The file currently is not fully functional still working on debugging it.
+
+%--------------------------    new day          -----------------------------
+\labday{Thursday, July 23, 2020}
+Documentation of code and progress reports to the git hub.
 
 %----------------------------------------------------------------------------------------
 \end{addmargin}
