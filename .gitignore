@@ -12,3 +12,10 @@
 
 # Ignore pdf versions of images created by .tex comilation
 **/figs/*.pdf
+
+# Ignore compiled program files from Beagle Bone
+*.a
+
+# Ignore user specific files from Beagle Bone code files
+cords.txt
+psftp_script.txt

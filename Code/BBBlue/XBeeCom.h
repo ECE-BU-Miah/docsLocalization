@@ -27,15 +27,15 @@ int InitPort(char* devPath, unsigned char vTime, unsigned char vMin){
         int port = open(devPath, O_RDWR);
         if(port < 0){
                 printf("Error %i from open: %s\n", errno, strerror(errno));
-                return -1;
+		return -1;
         }
 
         struct termios tty;
         memset(&tty,0,sizeof(tty));
         if(tcgetattr(port, &tty) != 0) {
                 printf("Error %i from tcgetattr: %s\n", errno, strerror(errno));
-                close(port);
-                return -2;
+		close(port);
+		return -2;
         }
 
         // Control Modes (c_cflag)
@@ -55,7 +55,6 @@ int InitPort(char* devPath, unsigned char vTime, unsigned char vMin){
         // Input Modes (c_iflag)
         tty.c_iflag &= ~(IXON|IXOFF|IXANY); // Turn off s/w flow ctrl
         tty.c_iflag &= ~(IGNBRK|BRKINT|PARMRK|ISTRIP|INLCR|IGNCR|ICRNL);// Disable special handeling
-            tty.c_iflag &= ~(IGNBRK|BRKINT|PARMRK|ISTRIP|INLCR|IGNCR|ICRNL);// Disable special handeling
 
         // Output Modes
         tty.c_oflag &= ~OPOST;  // Disable output specal interpretation
@@ -72,9 +71,9 @@ int InitPort(char* devPath, unsigned char vTime, unsigned char vMin){
         //save tty settings
         if(tcsetattr(port, TCSANOW, &tty) != 0){
                 printf("Error %i from tcsetattr: %s\n", errno, strerror(errno));
-                close(port);
-                return -3;
-        }
+        	close(port);
+		return -3;
+	}
 
         return port;
 }
@@ -82,31 +81,31 @@ int InitPort(char* devPath, unsigned char vTime, unsigned char vMin){
 // Send a Remote DB AT Command to given becon
 // @peram destAddr: 16-bit destination address(MY) of destination XBee
 void SendRemoteCommand_DB(int port, uint16_t destAddr){
-        // Create and send header for Remote AT command
-        static unsigned char msgHeader[13] = {0x7E, 0x00,0x0F, 0x17, 0x01, 0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
+	// Create and send header for Remote AT command
+	static unsigned char msgHeader[13] = {0x7E, 0x00,0x0F, 0x17, 0x01, 0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
         write(port,msgHeader,13);
 
-        // Send 16-bit destination peram (Stored post order LINUX)
-        write(port,((unsigned char*)&destAddr)+1,1);
-        write(port,((unsigned char*)&destAddr),1);
+	// Send 16-bit destination peram (Stored post order LINUX)
+	write(port,((unsigned char*)&destAddr)+1,1);
+	write(port,((unsigned char*)&destAddr),1);
 
-        // Send mode and command perams
-        static unsigned char modeNCom[3] = {0x02, 0x64,0x62};
-        write(port,modeNCom,3);
+	// Send mode and command perams
+	static unsigned char modeNCom[3] = {0x02, 0x64,0x62};
+	write(port,modeNCom,3);
 
-        // Calculate and Write out checksum with patern
-        // count down from 0x26(at addr 1) and loop back to 0xFF based on addres
-        unsigned char checkSum = (0xFF)-((0xD8+destAddr)%(0xFF));
-        write(port,&checkSum,1);
+	// Calculate and Write out checksum with patern
+	// count down from 0x26(at addr 1) and loop back to 0xFF based on addres
+	unsigned char checkSum = (0xFF)-((0xD8+destAddr)%(0xFF));
+	write(port,&checkSum,1);
 
 #if DEBUG
-        // Print out Command that was sent in hex
-        printf("[DEBUG] CMD: ");
-        for(int i=0; i < sizeof(msgHeader); i++)
-                printf("0x%02X ",msgHeader[i]);
-        printf("0x%02X 0x%02X ", ((unsigned char*)&destAddr)[0], ((unsigned char*)&destAddr)[1]);
-        printf("0x%02X 0x%02X 0x%02X ", modeNCom[0], modeNCom[1], modeNCom[2]);
-        printf("0x%02X\n",checkSum);
+	// Print out Command that was sent in hex
+	printf("[DEBUG] CMD: ");
+	for(int i=0; i < sizeof(msgHeader); i++)
+		printf("0x%02X ",msgHeader[i]);
+	printf("0x%02X 0x%02X ", ((unsigned char*)&destAddr)[0], ((unsigned char*)&destAddr)[1]);
+	printf("0x%02X 0x%02X 0x%02X ", modeNCom[0], modeNCom[1], modeNCom[2]);
+	printf("0x%02X\n",checkSum);
 #endif
 }
 
@@ -125,12 +124,12 @@ int ReadCommand(int port,  unsigned char* buf, int bufSize){
         }
 #if DEBUG
         else {
-                printf("[DEBUG] Recived: %d Bytes\n",num_Bytes);
-                printf("[DEBUG] MSG: ");
-                for(int i=0; i < num_Bytes; i++)
-                        printf("0x%02X ",buf[i]);
-                printf("\n");
-        }
+		printf("[DEBUG] Recived: %d Bytes\n",num_Bytes);
+		printf("[DEBUG] MSG: ");
+		for(int i=0; i < num_Bytes; i++)
+			printf("0x%02X ",buf[i]);
+		printf("\n");
+	}
 #endif
 
         // Check for valid checksum

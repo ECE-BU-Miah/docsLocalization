@@ -20,9 +20,9 @@ int RunATCommand(int port, unsigned char* cmd, int cmdSize, unsigned char* buf, 
 unsigned char GetFrameState(unsigned char* msg, int length);
 
 struct DBPair{
-        bool failed;
-        unsigned char cord;
-        unsigned char bcon;
+	bool failed;
+	unsigned char cord;
+	unsigned char bcon;
 };
 
 struct DBPair GetDBs(int port, int bconNum);
@@ -39,25 +39,25 @@ unsigned char* remoteCMDs[3] = {remoteDB_1, remoteDB_2, remoteDB_3};
 unsigned char read_buf[bufferSize];
 
 int main(){
-        // Initalize port
-        int port = InitPort();
-        struct DBPair dBm;
+	// Initalize port
+	int port = InitPort();
+	struct DBPair dBm;
 
-        // Run DB Check with Beacon 1
-        dBm = GetDBs(port,1);
-        if(dBm.failed){ close(port); return 1; }
+	// Run DB Check with Beacon 1
+	dBm = GetDBs(port,1);
+	if(dBm.failed){ close(port); return 1; }
 
-        printf("Beacon 1 [Forward] : %X dBm\n",dBm.bcon);
-        printf("Beacon 1 [Backward]: %X dBm\n",dBm.cord);
+	printf("Beacon 1 [Forward] : %X dBm\n",dBm.bcon);
+	printf("Beacon 1 [Backward]: %X dBm\n",dBm.cord);
 
-        // Run DB Check with Beacon 2
+	// Run DB Check with Beacon 1
         dBm = GetDBs(port,2);
         if(dBm.failed){ close(port); return 1; }
 
         printf("Beacon 2 [Forward] : %X dBm\n",dBm.bcon);
         printf("Beacon 2 [Backward]: %X dBm\n",dBm.cord);
 
-        // Run DB Check with Beacon 3
+	// Run DB Check with Beacon 1
         dBm = GetDBs(port,3);
         if(dBm.failed){ close(port); return 1; }
 
@@ -68,13 +68,13 @@ int main(){
 }
 
 struct DBPair GetDBs(int port, int bconNum){
-        // Init return pair struct
-        struct DBPair tmp;
-        tmp.failed = false;
-        tmp.cord = 0;
-        tmp.bcon = 0;
+	// Init return pair struct
+	struct DBPair tmp;
+	tmp.failed = false;
+	tmp.cord = 0;
+	tmp.bcon = 0;
 
-        // Run DB Remote AT Command for Beacon 1
+	// Run DB Remote AT Command for Beacon 1
         int numBytes = RunATCommand(port, remoteCMDs[bconNum-1], 19, read_buf,bufferSize);
         if(numBytes < 0){ tmp.failed = true; return tmp; }
         tmp.bcon = read_buf[numBytes-2];
@@ -84,58 +84,58 @@ struct DBPair GetDBs(int port, int bconNum){
         if(numBytes < 0){ tmp.failed = true; return tmp; }
         tmp.cord = read_buf[numBytes-2];
 
-        return tmp;
+	return tmp;
 }
 
 int RunATCommand(int port, unsigned char* cmd, int cmdSize, unsigned char* buf, int bufSize){
-        // Send out Command
+	// Send out Command
         write(port,cmd,cmdSize);
 
         // Read in response
         int num_Bytes = read(port, buf, bufSize);
 
-        // Check if read Errord out
+	// Check if read Errord out
         if(num_Bytes < 0){
                 printf("Error reading: %s\n", strerror(errno));
-                return -1;
-        }
+		return -1;
+        } 
 #if DEBUG
-        else printf("[DEBUG] Recived: %d Bytes\n",num_Bytes);
+	else printf("[DEBUG] Recived: %d Bytes\n",num_Bytes);
 #endif
 
-        // Check for valid checksum
+	// Check for valid checksum
         if(!CheckChecksum(buf,num_Bytes)){
-                printf("Invalid Checksum :(\n");
-                return -1;
-        }
+               	printf("Invalid Checksum :(\n");
+		return -1;
+	}
 #if DEBUG
-        else printf("[DEBUG] Valid Checksum!\n");
+	else printf("[DEBUG] Valid Checksum!\n");
 #endif
 
-        // Check if Error flag set in response
-        if(GetFrameState(buf,num_Bytes) > 0){
-                printf("Command Errored out :(\n");
-                return -1;
-        }
+	// Check if Error flag set in response
+	if(GetFrameState(buf,num_Bytes) > 0){
+		printf("Command Errored out :(\n");
+		return -1;
+	} 
 #if DEBUG
-        else printf("[DEBUG] Command Ran Sucesfuly!\n");
+	else printf("[DEBUG] Command Ran Sucesfuly!\n");
 #endif
 
-        return num_Bytes;
+	return num_Bytes;
 }
 
 unsigned char GetFrameState(unsigned char* msg, int length){
-        unsigned char frameType = msg[3];        // Get Frame Type
-        if(frameType == 0x97) return msg[17];
-        else if(frameType = 0x88) return msg[7];
-        else {
-                printf("Invalied frame type %X  encountered.\n",frameType);
-                return 255;
-        }
+	unsigned char frameType = msg[3]; 	 // Get Frame Type
+	if(frameType == 0x97) return msg[17];
+	else if(frameType = 0x88) return msg[7];
+	else {
+		printf("Invalied frame type %X  encountered.\n",frameType);
+		return 255;
+	}
 }
 
 int InitPort(){
-        int port = open("/dev/ttyUSB0", O_RDWR);
+	int port = open("/dev/ttyUSB0", O_RDWR);
         if(port < 0){
                 printf("Error %i from open: %s\n", errno, strerror(errno));
         }
@@ -153,7 +153,7 @@ int InitPort(){
         tty.c_cflag &= ~CRTSCTS;// Diable RTS/CTS
         tty.c_cflag |= CREAD|CLOCAL; // Turn on Read and ignore ctrl lines (CLOCAL = 1)
 
-        // Loacal Modes (c_lflag)
+	// Loacal Modes (c_lflag)
         tty.c_lflag &= ~ICANON; // Disable Cononical mode (wait for new line)
         tty.c_lflag &= ~ECHO;   // Disable echo
         tty.c_lflag &= ~ECHOE;  // Diable erasure
@@ -181,7 +181,7 @@ int InitPort(){
                 printf("Error %i from tcsetattr: %s\n", errno, strerror(errno));
         }
 
-        return port;
+	return port;
 }
 
 bool CheckChecksum(unsigned char* msg, int length){
